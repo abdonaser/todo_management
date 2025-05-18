@@ -5,20 +5,55 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button
+                        name="action_set_in_progress"
+                        type="object"
+                        string="Start"
+                        class="btn-secondary"
+                        invisible= "status != 'new'"
+                    />
+                    <button
+                        name="action_set_completed"
+                        type="object"
+                        string="Done"
+                        class="btn-primary"
+                        invisible="status == 'completed'"
+                           
+                    />
                     <field
                         name="status"
                         widget="statusbar"
                         options="{'clickable':1}"
                     />
                 </header>
+
                 <sheet>
-                    <group>
-                        <field name="task_name" />
-                        <field name="assign_to" />
-                        <field name="email" />
-                        <field name="description" />
-                        <field name="due_date" />
+                    <group string="Assignee" class="parant"> 
+                        <field 
+                            name="photo" 
+                            widget="image" 
+                            nolabel="1"
+                            class="oe_avatar image" 
+                        />
+ 
+                        <field 
+                            name="assign_to" 
+                            class="assign_to"
+                        />
+
+                        <field 
+                            name="email"
+                            nolabel="1"
+                            class="email"
+                        />
                     </group>
+
+                    <group string="Task">
+                        <field name="task_name"/>
+                        <field name="description"/>
+                        <field name="due_date"/>
+                    </group>
+
                 </sheet>
 
                 <div class="oe_chatter">
@@ -34,13 +69,13 @@
         <field name="name">todo_tree</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order="status, due_date">
                 <field name="task_name" />
                 <field name="assign_to" />
-                <field name="email" />
-                <field name="description" />
                 <field name="due_date" />
                 <field name="status" />
+                <field name="description" optional='1'/>
+                <field name="email" optional='1'/>
             </tree>
         </field>
     </record>

@@ -14,8 +14,8 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'todo_management/static/description/to-do-list.png',
-        ],
+            'todo_management/static/src/css/todo.css',
+        ]
     },
     'application':True,
 }
