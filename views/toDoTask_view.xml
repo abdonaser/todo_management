@@ -1,0 +1,92 @@
+<odoo>
+    <record id="todo_view_form" model="ir.ui.view">
+        <field name="name">todo_form</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="status"
+                        widget="statusbar"
+                        options="{'clickable':1}"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="task_name" />
+                        <field name="assign_to" />
+                        <field name="email" />
+                        <field name="description" />
+                        <field name="due_date" />
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_no_one"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="todo_view_tree" model="ir.ui.view">
+        <field name="name">todo_tree</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="task_name" />
+                <field name="assign_to" />
+                <field name="email" />
+                <field name="description" />
+                <field name="due_date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="todo_view_searsh" model="ir.ui.view">
+        <field name="name">todo_searsh</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Basic searchable fields -->
+                <field name="task_name" />
+                <field name="assign_to" />
+
+                <!-- Filters (predefined searches) -->
+                <filter name="new" string="New Status" domain="[('status', '=', 'new')]"/>
+                <filter name="in_progress" string="Status in Progress" domain="[('status', '=', 'in_progress')]"/>
+                <filter name="completed" string="Status Completed" domain="[('status', '=', 'completed')]"/>
+
+                <!-- Group By Filters -->
+                <filter name="groupby_status" string="Status" context='{"group_by":"status"}'/>
+                <filter name="groupby_assign_to" string="Assign To" context='{"group_by":"assign_to"}'/>
+                <filter name="groupby_due_date" string="Due Date" context='{"group_by":"due_date"}'/>
+
+            </search>
+        </field>
+    </record>
+
+
+    <record id="todo_action" model="ir.actions.act_window">
+        <field name="name">ToDo List</field>
+        <field name="res_model">todo.task</field>
+         <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiline_face">
+                create your first To Do!
+            </p>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <menuitem
+        id="todo_action_menu"
+        name="ToDo List"
+        parent="todo_sub_menu"
+        action="todo_action"
+    />
+</odoo>

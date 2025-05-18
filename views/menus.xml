@@ -1,0 +1,20 @@
+<odoo>
+    <!-- main module menu-->
+    <menuitem
+        id="todo_main_menu_root"
+        name="Todo Task"
+        web_icon="todo_management,static/description/to-do-list.png"
+    />
+
+    <!-- To Do Tasks Menu -->
+    <menuitem
+        id="todo_sub_menu"
+        name="To Dos"
+        parent="todo_main_menu_root"
+    />
+
+
+
+
+
+</odoo>
